@@ -1,6 +1,6 @@
 {
   "name": "celery-node",
-  "version": "0.5.9",
+  "version": "0.6.0",
   "description": "celery written in nodejs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actumn/celery.node.git"
+    "url": "git+https://github.com/mattcontinisio/celery.node.git"
   },
   "keywords": [
     "node-celery",
@@ -27,36 +27,44 @@
     "rabbitmq",
     "redis"
   ],
-  "author": "actumn814@gmail.com",
+  "author": "mrcontinisio@gmail.com",
+  "contributors": [
+    {
+      "email": "actumn814@gmail.com"
+    },
+    {
+      "email": "mrcontinisio@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/actumn/celery.node/issues"
+    "url": "https://github.com/mattcontinisio/celery.node/issues"
   },
-  "homepage": "https://github.com/actumn/celery.node#readme",
+  "homepage": "https://github.com/mattcontinisio/celery.node#readme",
   "devDependencies": {
-    "@types/amqplib": "^0.5.17",
-    "@types/chai": "^4.2.9",
-    "@types/ioredis": "^4.28.5",
-    "@types/mocha": "^7.0.1",
-    "@types/sinon": "^9.0.9",
-    "@types/uuid": "^3.4.7",
-    "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
-    "chai": "^4.2.0",
-    "eslint": "^7.16.0",
-    "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-mocha": "^8.0.0",
-    "express": "^4.17.1",
-    "mocha": "^8.2.1",
-    "prettier": "^1.19.1",
-    "sinon": "^7.2.2",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.7.2"
+    "@types/amqplib": "^0.10.3",
+    "@types/chai": "^4.3.9",
+    "@types/ioredis": "^5.0.0",
+    "@types/mocha": "^10.0.3",
+    "@types/sinon": "^17.0.0",
+    "@types/uuid": "^9.0.6",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "chai": "^4.3.10",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-mocha": "^10.2.0",
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "prettier": "^3.0.3",
+    "sinon": "^17.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "amqplib": "^0.8.0",
-    "ioredis": "^4.28.5",
-    "uuid": "^3.3.2"
+    "amqplib": "^0.10.3",
+    "ioredis": "^5.3.2",
+    "uuid": "^9.0.1"
   }
 }

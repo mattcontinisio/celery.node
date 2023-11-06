@@ -3,6 +3,11 @@ import Base from "./base";
 import Task from "./task";
 import { AsyncResult } from "./result";
 
+export interface TaskOptions {
+  eta?: Date;
+  countdown?: number;
+}
+
 class TaskMessage {
   constructor(
     readonly headers: object,
@@ -44,17 +49,22 @@ export default class Client extends Base {
     taskId: string,
     taskName: string,
     args?: Array<any>,
-    kwargs?: object
+    kwargs?: object,
+    options?: TaskOptions,
   ): TaskMessage {
+    let eta = options?.eta;
+    if (options?.countdown) {
+      eta = new Date(Date.now() + options.countdown * 1000);
+    }
+  
     const message: TaskMessage = {
       headers: {
         lang: "js",
         task: taskName,
-        id: taskId
-        /*
-        'shadow': shadow,
-        'eta': eta,
-        'expires': expires,
+        id: taskId,
+        //'shadow': shadow,
+        eta: eta?.toISOString()
+        /*'expires': expires,
         'group': group_id,
         'retries': retries,
         'timelimit': [time_limit, soft_time_limit],
@@ -66,8 +76,8 @@ export default class Client extends Base {
         */
       },
       properties: {
-        correlationId: taskId,
-        replyTo: ""
+        correlation_id: taskId,
+        reply_to: ""
       },
       body: [args, kwargs, {}],
       sentEvent: null
@@ -90,19 +100,26 @@ export default class Client extends Base {
     taskId: string,
     taskName: string,
     args?: Array<any>,
-    kwargs?: object
+    kwargs?: object,
+    options?: TaskOptions,
   ): TaskMessage {
+    let eta = options?.eta;
+    if (options?.countdown) {
+      eta = new Date(Date.now() + options.countdown * 1000);
+    }
+
     const message: TaskMessage = {
       headers: {},
       properties: {
-        correlationId: taskId,
-        replyTo: ""
+        correlation_id: taskId,
+        reply_to: ""
       },
       body: {
         task: taskName,
         id: taskId,
-        args: args,
-        kwargs: kwargs
+        args,
+        kwargs,
+        eta: eta?.toISOString(),
       },
       sentEvent: null
     };
@@ -136,10 +153,11 @@ export default class Client extends Base {
     taskName: string,
     args?: Array<any>,
     kwargs?: object,
-    taskId?: string
+    taskId?: string,
+    options?: TaskOptions,
   ): AsyncResult {
     taskId = taskId || v4();
-    const message = this.createTaskMessage(taskId, taskName, args, kwargs);
+    const message = this.createTaskMessage(taskId, taskName, args, kwargs, options);
     this.sendTaskMessage(taskName, message);
 
     const result = new AsyncResult(taskId, this.backend);

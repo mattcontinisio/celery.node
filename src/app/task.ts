@@ -1,4 +1,4 @@
-import Client from "./client";
+import Client, { TaskOptions } from "./client";
 import { AsyncResult } from "./result";
 
 export default class Task {
@@ -28,7 +28,7 @@ export default class Task {
     return this.applyAsync([...args]);
   }
 
-  public applyAsync(args: Array<any>, kwargs?: object): AsyncResult {
+  public applyAsync(args: Array<any>, kwargs?: object, taskId?: string, options?: TaskOptions): AsyncResult {
     if (args && !Array.isArray(args)) {
       throw new Error("args is not array");
     }
@@ -37,6 +37,6 @@ export default class Task {
       throw new Error("kwargs is not object");
     }
 
-    return this.client.sendTask(this.name, args || [], kwargs || {});
+    return this.client.sendTask(this.name, args || [], kwargs || {}, taskId, options);
   }
 }
